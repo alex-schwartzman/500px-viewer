@@ -45,6 +45,8 @@ android {
 }
 
 dependencies {
+    provided 'org.roboguice:roboblender:3.0.1'
+    compile 'org.roboguice:roboguice:3.0.1'
     compile 'com.blandware.android.atleap:core:0.4@aar'
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.android.support:appcompat-v7:23.4.0'
@@ -57,8 +59,6 @@ dependencies {
     compile 'com.squareup.retrofit:converter-jackson:1.6.1'
     compile 'com.squareup.okhttp:okhttp:2.7.1'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.7.1'
-    provided 'org.roboguice:roboblender:3.0.1'
-    compile 'org.roboguice:roboguice:3.0.1'
     compile 'com.android.support:recyclerview-v7:23.4.0'
     compile 'com.github.alex-schwartzman:greedo-layout-for-android:21c2ff2'
     compile 'com.github.lsjwzh.RecyclerViewPager:lib:v1.1.0'

@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alex.schwartzman.fivehundredpx.R;
+import com.alex.schwartzman.fivehundredpx.network.robospice.GetImagesListRequest;
 import com.alex.schwartzman.fivehundredpx.provider.DefaultContract;
 import com.blandware.android.atleap.loader.LoaderManagerCreator;
 import com.blandware.android.atleap.loader.SimpleCursorRecyclerAdapterLoadable;
@@ -24,9 +25,14 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
+import com.octo.android.robospice.persistence.DurationInMillis;
+
+import org.roboguice.shaded.goole.common.base.Function;
 
 import java.util.Map;
 import java.util.TreeMap;
+
+import roboguice.util.Ln;
 
 public class DetailFragment extends BaseFragment {
 
@@ -42,6 +48,20 @@ public class DetailFragment extends BaseFragment {
     public void rewind(int position) {
         mItemId = position;
     }
+
+    /////////////////
+    ///HACK! This needs to be re-done, properly using the provider
+    private final Function<Integer, Void> mPagingCallback = new Function<Integer, Void>() {
+        public final int AVERAGE_COUNT_OF_IMAGES_PER_PAGE = 19;
+
+        @Override
+        public Void apply(Integer items) {
+            final int page = items / AVERAGE_COUNT_OF_IMAGES_PER_PAGE + 1;
+            executeSpiceRequest(new GetImagesListRequest(page), MainActivity.CACHE_KEY_PHOTO + page, DurationInMillis.ONE_MINUTE);
+            return null;
+        }
+    };
+////////////////
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -72,6 +92,16 @@ public class DetailFragment extends BaseFragment {
             @Override
             public boolean setViewValue(View view, Cursor cursor, int i) {
                 if (view.getId() == R.id.image_frame) {
+                    if (cursor.isLast()) {
+                        if (mPagingCallback != null) {
+                            try {
+                                mPagingCallback.apply(cursor.getCount());
+                            } catch (Exception e) {
+                                Ln.e(e);
+                            }
+                        }
+                    }
+
                     final String imageUrl = cursor.getString(i); //Could not use
                     Glide
                             .with(getContext().getApplicationContext())

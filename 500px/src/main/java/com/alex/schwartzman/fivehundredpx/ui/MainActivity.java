@@ -53,7 +53,7 @@ public class MainActivity extends CustomBaseActivity implements RequestListener 
 
     private final DefaultSpiceManager spiceManager = new DefaultSpiceManager(NetworkService.class);
 
-    private static final String CACHE_KEY_PHOTO = "photo_cache_key";
+    public static final String CACHE_KEY_PHOTO = "photo_cache_key";
 
     @InjectView(R.id.toolbar)
     private
