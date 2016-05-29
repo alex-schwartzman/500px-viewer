@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Sample 500px viewer</string>
+    <string name="no_network">Internet connection is required to complete the operation.</string>
+
+    <string name="activity_auth_title">Login</string>
+    <string name="autenticating_message">Authenticating (fake)</string>
+    <string name="item_image_contentdescription">Todo Item Image</string>
+    <string name="photo_api_base_url">https://api.500px.com/v1</string>
+    <string name="deafult_api_base_url">http://127.0.0.1</string>
+    <string name="action_about">About</string>
+    <string name="transition_text">transition</string>
+    <string name="transition_target_content_desciption">transition_target_content_desciption</string>
+
+</resources>

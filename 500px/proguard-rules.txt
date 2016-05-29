@@ -1,0 +1,147 @@
+# Add project specific ProGuard rules here.
+# By default, the flags in this file are appended to flags specified
+# in /Applications/Android Studio.app/sdk/tools/proguard/proguard-android.txt
+# You can edit the include path and order by changing the ProGuard
+# include property in project.properties.
+#
+# For more details, see
+#   http://developer.android.com/guide/developing/tools/proguard.html
+
+# Add any project specific keep options here:
+
+# If your project uses WebView with JS, uncomment the following
+# and specify the fully qualified class name to the JavaScript interface
+# class:
+#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+#   public *;
+#}
+
+#keep source code line numbers
+-renamesourcefileattribute SourceFile
+-keepattributes SourceFile,LineNumberTable
+-dontobfuscate
+
+# remove logs
+-assumenosideeffects class android.util.Log {
+    public static *** v(...);
+    public static *** d(...);
+    public static *** i(...);
+    public static *** w(...);
+    public static *** e(...);
+}
+
+
+# Google Play Services
+-keep class * extends java.util.ListResourceBundle {
+    protected Object[][] getContents();
+}
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+-keepnames @com.google.android.gms.common.annotation.KeepName class *
+-keepclassmembernames class * {
+    @com.google.android.gms.common.annotation.KeepName *;
+}
+-keepnames class * implements android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+# keep POJOs for ORMLite and Jackson JSON serializer
+-keep class com.alex.schwartzman.fivehundredpx.model.**
+-keepclassmembers class com.alex.schwartzman.fivehundredpx.model.** { *; }
+
+# parsers
+-dontwarn org.w3c.dom.**
+
+# Jackson
+-keepnames class com.fasterxml.jackson.annotation.** { *; }
+
+#ORMLite
+-keepnames class com.j256.** { *; }
+
+#Retrofit
+-keep class retrofit.http.** { *; }
+-dontwarn rx.**
+-dontwarn com.google.appengine.api.urlfetch.**
+
+#Keep Generics
+-keepattributes Signature
+
+#okhttp
+-dontwarn com.squareup.okhttp.**
+
+#android atleap
+-keep,allowoptimization,allowobfuscation class * extends **.SQLiteUriMatcher { *; }
+
+-keepclassmembers class * {
+ @javax.inject.Inject <init>(...);
+ @javax.inject.Inject <fields>;
+ @roboguice.inject.InjectView <fields>;
+ @roboguice.inject.InjectFragment <fields>;
+ @javax.annotation.Nullable <fields>;
+ }
+
+-keepclasseswithmembers class * {
+@javax.annotation.Nullable <fields>;
+}
+
+-keepclasseswithmembers class * {
+@javax.inject.Inject <fields>;
+}
+# There's no way to keep all @Observes methods, so use the On*Event convention to identify event handlers
+-keepclassmembers class * {
+    void *(**On*Event);
+}
+
+-keepclasseswithmembers class * {
+@javax.inject.Inject <init>(...);
+}
+
+# Please, preserve empty constructors, otherwise RoboGuice won't be able to instantiate
+-keepclassmembers class * {
+    <init> ();
+}
+
+-keep class retrofit.** { *; }
+-keep class com.squareup.okhttp.** { *; }
+-dontwarn rx.**
+-dontwarn com.google.appengine.api.urlfetch.**
+-dontwarn com.squareup.okhttp.**
+-dontwarn okio.**
+-dontwarn retrofit.**
+-keepclasseswithmembers class * {
+@retrofit.http.* <methods>; }
+-keep class com.j256.** {*;}
+-dontwarn android.support.v4.app.**
+-dontwarn roboguice.**
+-dontwarn com.apptentive.android.sdk.**
+-keep public class * extends com.google.inject.AbstractModule
+-keep public class * extends com.google.inject.AnnotationDatabase
+-keep public class javax.inject.** { *; }
+-keep public class javax.annotation.** { *; }
+-keep public class roboguice.** { *; }
+-keep public class android.app.** { *; }
+-dontwarn javax.annotation.**
+-dontwarn javax.inject.**
+-dontwarn sun.misc.Unsafe
+-dontwarn com.squareup.okhttp.**
+
+-keepclasseswithmembers class * {
+public <init> (android.content.Context, android.util.AttributeSet);
+}
+-keepclasseswithmembers class * {
+public <init> (android.content.Context, android.util.AttributeSet, int);
+}
+-keepclassmembers class * implements android.os.Parcelable { static android.os.Parcelable$Creator *; }
+-keepclassmembers class **.R$* { public static <fields>; }
+-dontwarn com.octo.**
+-dontwarn android.app.**
+
+-keep class com.lsjwzh.widget.recyclerviewpager.**
+-dontwarn com.lsjwzh.widget.recyclerviewpager.**
+
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}

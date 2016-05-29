@@ -1,0 +1,60 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/image_frame"
+    >
+
+    <uk.co.senab.photoview.PhotoView
+        android:id="@+id/fullsize_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:src="@android:drawable/ic_lock_idle_low_battery"
+        android:contentDescription="@string/item_image_contentdescription" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="bottom"
+        android:background="@color/details_bottom_shade_for_text">
+
+        <TextView
+            android:id="@+id/image_title"
+            style="@style/TextView.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Show must go on"
+            android:textColor="@color/details_text_color_on_shade" />
+
+        <TextView
+            android:id="@+id/image_author"
+            style="@style/TextView.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Queen"
+            android:textColor="@color/details_text_color_on_shade" />
+
+        <TextView
+            android:id="@+id/image_id"
+            style="@style/TextView.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="RtlHardcoded"
+            tools:text="1234"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/image_camera_model"
+            style="@style/TextView.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/view_full_margin"
+            tools:text="Action bar implementation which uses the native action bar on Android 4.0+ and a custom implementation on pre-4.0 through a single API and theme."
+            android:textColor="@color/details_text_color_on_shade" />
+
+    </LinearLayout>
+
+
+</FrameLayout>
